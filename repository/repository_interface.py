@@ -1,7 +1,7 @@
 import pymongo
 import json
 from typing import TypeVar, Generic, List, get_args
-from bson import ObjectId
+from bson.objectid import ObjectId
 
 T = TypeVar('T')
 
@@ -14,7 +14,6 @@ class InterfaceRepository(Generic[T]):
         self.base_datos = client[data_config["database-name"]]
         the_class = get_args(self.__orig_bases__[0])
         self.coleccion = the_class[0].__name__.lower()
-        pass
 
     def load_config(self):
         with open("config.json") as f:

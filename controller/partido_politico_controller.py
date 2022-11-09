@@ -22,7 +22,7 @@ class ControladorPartidoPolitico:
     # Actualizar
     def update(self, id, info_partido_politico):
         partido_politico_actualizado = PartidoPolitico(info_partido_politico)
-        return self.repo.update(partido_politico_actualizado)
+        return self.repo.update(id, partido_politico_actualizado)
 
     # Delete
     def delete(self, id):

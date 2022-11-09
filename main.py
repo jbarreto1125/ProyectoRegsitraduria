@@ -4,8 +4,9 @@ from flask import request
 from flask_cors import CORS
 import json
 from waitress import serve
+from controller.partido_politico_controller import ControladorPartidoPolitico
 
-from controller import partido_politico_controller
+partido_politico_controller = ControladorPartidoPolitico()
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -31,7 +32,7 @@ def actualizar_partido_politico(id):
     return jsonify(partido_politico_actualizado)
 
 
-@app.route("/partidos_politicos>", methods=["GET"])
+@app.route("/partidos_politicos", methods=["GET"])
 def listar_partidos_politicos():
     lista_partidos_politicos = partido_politico_controller.index()
     return jsonify(lista_partidos_politicos)
