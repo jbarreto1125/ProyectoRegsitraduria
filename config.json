@@ -1,4 +1,6 @@
 {
   "url-backend" : "127.0.0.1",
-  "port" : 9999
+  "port" : 9999,
+  "database-url" : "mongodb+srv://jpbarreto:barreto1125@cluster0.omlpeju.mongodb.net/bd-gestor-votaciones?retryWrites=true&w=majority",
+  "database-name" : "bd-gestor-votaciones"
 }
