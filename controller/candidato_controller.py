@@ -1,10 +1,12 @@
 from repository.candidato_repository import RepositorioCandidato
 from model.candidato import Candidato
+from repository.partido_politico_repository import RepositorioPartidoPolitico
 
 
 class ControladorCandidato:
     def __init__(self):
         self.repo = RepositorioCandidato()
+        self.repo_partido_politico = RepositorioPartidoPolitico()
 
         # listar
 
@@ -14,8 +16,17 @@ class ControladorCandidato:
         # Crear
 
     def create(self, info_candidato):
+        try:
+            res = self.repo_partido_politico.find_by_id(info_candidato["id_partido_politico"])
+        except:
+            return {"message": "El Partido Politico con id " + info_candidato[
+                "id_partido_politico"] + "no existe"}, 404
+        if len(res) == 0:
+            return {"message": "El Partido Politico con id " + info_candidato[
+                "id_partido_politico"] + "no existe"}, 404
+
         nuevo_candidato = Candidato(info_candidato)
-        return self.repo.save(nuevo_candidato)
+        return self.repo.save(nuevo_candidato), 200
 
         # Leer
 
