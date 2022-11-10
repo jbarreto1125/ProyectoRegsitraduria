@@ -19,16 +19,13 @@ class ControladorCandidato:
         try:
             res = self.repo_partido_politico.find_by_id(info_candidato["id_partido_politico"])
         except:
-            return {"message": "El Partido Politico con id " + info_candidato[
-                "id_partido_politico"] + "no existe"}, 404
-        if len(res) == 0:
-            return {"message": "El Partido Politico con id " + info_candidato[
-                "id_partido_politico"] + "no existe"}, 404
+            return {"message": "El partido politico con id " + info_candidato["id_partido_politico"] + " no existe"}
 
         nuevo_candidato = Candidato(info_candidato)
-        return self.repo.save(nuevo_candidato), 200
 
-        # Leer
+        return self.repo.save(nuevo_candidato)
+
+            # Leer
 
     def show(self, id):
         return self.repo.find_by_id(id)

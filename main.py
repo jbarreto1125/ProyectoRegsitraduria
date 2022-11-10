@@ -10,7 +10,7 @@ from controller.candidato_controller import ControladorCandidato
 
 partido_politico_controller = ControladorPartidoPolitico()
 mesa_controller = ControladorMesa()
-candidato_controller = ControladorCandidato
+candidato_controller = ControladorCandidato()
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -90,7 +90,7 @@ def eliminar_mesa(id):
 def crear_candidato():
     info_candidato = request.get_json()
     candidato_creado = candidato_controller.create(info_candidato)
-    return jsonify(candidato_creado[0]), candidato_creado[1]
+    return jsonify(candidato_creado)
 
 
 @app.route("/candidato/<string:id>", methods=["PUT"])
