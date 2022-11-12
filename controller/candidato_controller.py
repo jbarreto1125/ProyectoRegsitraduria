@@ -40,3 +40,6 @@ class ControladorCandidato:
 
     def delete(self, id):
         return self.repo.delete(id)
+
+    def find_by_partido_politico(self, id_partido_politico):
+        return self.repo.query({"id_partido_politico": id_partido_politico})

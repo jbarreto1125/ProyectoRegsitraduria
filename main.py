@@ -7,10 +7,12 @@ from waitress import serve
 from controller.partido_politico_controller import ControladorPartidoPolitico
 from controller.mesa_controller import ControladorMesa
 from controller.candidato_controller import ControladorCandidato
+from controller.votacion_controller import ControladorVotacion
 
 partido_politico_controller = ControladorPartidoPolitico()
 mesa_controller = ControladorMesa()
 candidato_controller = ControladorCandidato()
+votacion_controller = ControladorVotacion
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -106,6 +108,12 @@ def listar_candidatos():
     return jsonify(lista_candidatos)
 
 
+@app.route("/candidato/partido_politico/<string:id>", methods=["GET"])
+def buscar_candidato_partido_politico(id):
+    can = candidato_controller.find_by_partido_politico(id)
+    return jsonify(can)
+
+
 @app.route("/candidato/<string:id>", methods=["GET"])
 def mostrar_candidato(id):
     can = candidato_controller.show(id)
@@ -116,6 +124,19 @@ def mostrar_candidato(id):
 def eliminar_candidato(id):
     can = candidato_controller.delete(id)
     return jsonify(can)
+
+
+@app.route("/votaciones", methods=["GET"])
+def listar_votaciones():
+    lista_votaciones = votacion_controller.index()
+    return jsonify(lista_votaciones)
+
+
+@app.route("/votacion", methods=["POST"])
+def crear_votacion():
+    info_votacion = request.get_json()
+    votacion_creada = votacion_controller.create(info_votacion)
+    return jsonify(votacion_creada)
 
 
 if __name__ == "__main__":
