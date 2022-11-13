@@ -12,7 +12,7 @@ from controller.votacion_controller import ControladorVotacion
 partido_politico_controller = ControladorPartidoPolitico()
 mesa_controller = ControladorMesa()
 candidato_controller = ControladorCandidato()
-votacion_controller = ControladorVotacion
+votacion_controller = ControladorVotacion()
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -135,8 +135,33 @@ def listar_votaciones():
 @app.route("/votacion", methods=["POST"])
 def crear_votacion():
     info_votacion = request.get_json()
-    votacion_creada = votacion_controller.create(info_votacion)
-    return jsonify(votacion_creada)
+    votacion_creado = votacion_controller.create(info_votacion)
+    return jsonify(votacion_creado)
+
+
+@app.route("/votacion/<string:id>", methods=["PUT"])
+def actualizar_votacion(id):
+    info_votacion = request.get_json()
+    votacion_actualizada = votacion_controller.update(id, info_votacion)
+    return jsonify(votacion_actualizada)
+
+
+@app.route("/votacion/<string:id>", methods=["DELETE"])
+def eliminar_votacion(id):
+    vot = votacion_controller.delete(id)
+    return jsonify(vot)
+
+
+@app.route("/votacion/mesa/<string:id>", methods=["GET"])
+def buscar_votacion_mesa(id):
+    mes = votacion_controller.find_by_mesa(id)
+    return jsonify(mes)
+
+
+@app.route("/votacion/candidato/<string:id>", methods=["GET"])
+def buscar_votacion_candidato(id):
+    can = votacion_controller.find_by_candidato(id)
+    return jsonify(can)
 
 
 if __name__ == "__main__":

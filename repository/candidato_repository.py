@@ -17,10 +17,9 @@ class RepositorioCandidato(InterfaceRepository[Candidato]):
             x["partido_politico"] = self.repo_par.find_by_id(id_par)
         return lista_candidatos
 
-
-def find_by_id(self, id):
-    candidato = super().find_by_id(id)
-    id_par = candidato["id_partido_politico"]
-    del candidato["id_partido_politico"]
-    candidato["partido_politico"] = self.repo_par.find_by_id(id_par)
-    return candidato
+    def find_by_id(self, id):
+        candidato = super().find_by_id(id)
+        id_par = candidato["id_partido_politico"]
+        del candidato["id_partido_politico"]
+        candidato["partido_politico"] = self.repo_par.find_by_id(id_par)
+        return candidato
