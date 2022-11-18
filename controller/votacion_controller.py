@@ -22,15 +22,15 @@ class ControladorVotacion:
             vot = self.repo_mesa.find_by_id(info_votacion["id_mesa"])
 
         except:
-            return {"message": "La Mesa con id " + info_votacion["id_mesa"] + " no existe"}
+            return {"message": "La Mesa con id " + info_votacion["id_mesa"] + " no existe"}, 400
         try:
             vot = self.repo_candidato.find_by_id(info_votacion["id_candidato"])
 
         except:
-            return {"message": "El Candidato con id " + info_votacion["id_candidato"] + " no existe"}
+            return {"message": "El Candidato con id " + info_votacion["id_candidato"] + " no existe"}, 400
 
         nueva_votacion = Votacion(info_votacion)
-        return self.repo.save(nueva_votacion)
+        return self.repo.save(nueva_votacion), 200
 
         # Leer
 

@@ -136,7 +136,7 @@ def listar_votaciones():
 def crear_votacion():
     info_votacion = request.get_json()
     votacion_creado = votacion_controller.create(info_votacion)
-    return jsonify(votacion_creado)
+    return jsonify(votacion_creado[0]), votacion_creado[1]
 
 
 @app.route("/votacion/<string:id>", methods=["PUT"])
