@@ -25,7 +25,7 @@ class ControladorCandidato:
 
         return self.repo.save(nuevo_candidato)
 
-            # Leer
+        # Leer
 
     def show(self, id):
         return self.repo.find_by_id(id)
